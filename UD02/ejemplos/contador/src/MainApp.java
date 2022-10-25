@@ -13,6 +13,12 @@ public class MainApp {
       hilos[i].start();
     }
     
+    for (int i = 0; i < hilos.length; i++) {
+      try {
+        hilos[i].join();
+      } catch (InterruptedException e) {}
+    }
+    
     System.out.println("Contador llegó hasta " + contador.getValor());
   }
 }
