@@ -1,6 +1,7 @@
 package psp.ud03.ejemplos.echo.cliente;
 
 import java.util.Scanner;
+import psp.ud03.ejemplos.echo.ConexionException;
 
 public class ClienteEchoApp {
 
@@ -24,14 +25,18 @@ public class ClienteEchoApp {
       String mensaje;
       Scanner sc = new Scanner(System.in);
       do {
-        // Lee el mensaje
+        // Lee el mensaje desde teclado
+        System.out.print("Introduzca el mensaje a enviar (vacio para acabar): ");
         mensaje = sc.nextLine();
-        // Lo envía
-        cliente.enviar(mensaje);
-        // Recibe la respuesta
-        String respuesta = cliente.recibir();
-        // Y la imprime
-        System.out.println("Respuesta recibida: " + respuesta);
+        // Si no es el mensaje de fin
+        if (mensaje.length() > 0) {
+          // Lo envía
+          cliente.enviar(mensaje);
+          // Recibe la respuesta
+          String respuesta = cliente.recibir();
+          // Y la imprime
+          System.out.println("Respuesta recibida: " + respuesta);
+        }
       } while (mensaje.length() > 0);
       // Terminamos el cliente (la conexion)
       cliente.cerrar();
@@ -39,7 +44,7 @@ public class ClienteEchoApp {
     } catch (NumberFormatException e) {
       System.err.println("El puerto proporcionado no es válido. Terminando.");
       return;
-    } catch (ClienteException e) {
+    } catch (ConexionException e) {
       System.err.println("Error en la conexión.");
       System.err.println("Excepcion original:");
       e.printStackTrace(System.err);

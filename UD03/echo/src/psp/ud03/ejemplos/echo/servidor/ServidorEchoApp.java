@@ -1,7 +1,5 @@
 package psp.ud03.ejemplos.echo.servidor;
 
-import java.util.Scanner;
-
 public class ServidorEchoApp {
   
   private static final int DEFAULT_PORT = 1234;
